@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCMサンドイッチルーレット</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+        
+        body { font-family: 'Fredoka One', cursive; text-align: center; padding: 20px; background-color: #ffff00; }
+        .container { max-width: 400px; margin: auto; }
+        .roulette { font-size: 28px; font-weight: bold; margin: 20px 0; color: #4169e1; }
+        .round-button { 
+            width: 200px; 
+            height: 60px; 
+            border-radius: 30px; 
+            border: none; 
+            background-color: #4169e1; 
+            color: white; 
+            font-size: 18px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 15px;
+        }
+        .round-button:hover {
+            background-color: #3155a3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="color: #4169e1;">OCMサンドイッチルーレット</h2>
+        <div class="roulette" id="roulette">タップしてスタート！</div>
+        <button class="round-button" onclick="startRoulette()">ルーレットを回す</button>
+    </div>
+    
+    <script>
+        const ingredients = ["エッグ", "ポテト", "オリジナル", "ツナ", "フルーツ", "フィッシュ", "ハッシュドポテト", "ロースハム", "クリームチーズ", "チキン", "ハンバーグ", "ベーコン", "エビカツ", "ソーセージ", "生ハム", "スモークサーモン", "パストラミビーフ"];
+        
+        function startRoulette() {
+            let rouletteText = document.getElementById("roulette");
+            let count = 20; // 回転回数
+            let interval = setInterval(() => {
+                let shuffled = ingredients.sort(() => 0.5 - Math.random());
+                rouletteText.innerText = shuffled[0] + "\nAND\n" + shuffled[1];
+                count--;
+                if (count === 0) {
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>
