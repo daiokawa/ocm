@@ -25,6 +25,11 @@
         .round-button:hover {
             background-color: #3155a3;
         }
+        .history {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #4169e1;
+        }
     </style>
 </head>
 <body>
@@ -32,13 +37,16 @@
         <h2 style="color: #4169e1;">OCMサンドイッチルーレット</h2>
         <div class="roulette" id="roulette">タップしてスタート！</div>
         <button class="round-button" onclick="startRoulette()">ルーレットを回す</button>
+        <div class="history" id="history"></div>
     </div>
     
     <script>
         const ingredients = ["エッグ", "ポテト", "オリジナル", "ツナ", "フルーツ", "フィッシュ", "ハッシュドポテト", "ロースハム", "クリームチーズ", "チキン", "ハンバーグ", "ベーコン", "エビカツ", "ソーセージ", "生ハム", "スモークサーモン", "パストラミビーフ"];
+        let history = [];
         
         function startRoulette() {
             let rouletteText = document.getElementById("roulette");
+            let historyText = document.getElementById("history");
             let count = 20; // 回転回数
             let interval = setInterval(() => {
                 let shuffled = ingredients.sort(() => 0.5 - Math.random());
@@ -46,6 +54,10 @@
                 count--;
                 if (count === 0) {
                     clearInterval(interval);
+                    let result = rouletteText.innerText;
+                    history.unshift(result);
+                    if (history.length > 10) history.pop();
+                    historyText.innerHTML = "<b>履歴:</b><br>" + history.join("<br>");
                 }
             }, 100);
         }
